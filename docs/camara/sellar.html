@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" data-idioma="es" data-modo="noche">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sellar — AÚN</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../assets/css/aun.css">
+</head>
+<body data-obra="sellar">
+
+<header class="barra aparato">
+  <a class="sello" href="../index.html">AÚN</a>
+  <span class="hueco"></span>
+  <a href="index.html">cámara</a>
+</header>
+
+<main class="camara" style="max-width:44rem">
+
+  <h1 class="lema" style="font-size:clamp(1.4rem,1.1rem + 1.2vw,2rem)">Sellar un texto</h1>
+
+  <p class="nota">
+    Herramienta local. Pega el texto, elige una frase de paso larga, y copia el bloque
+    resultante dentro de la página de la cámara. El texto en claro y la frase de paso
+    no salen nunca de este navegador — no hay red, no hay servidor.
+    <b>La frase de paso no se guarda en ningún sitio: si se pierde, el texto se pierde.</b>
+  </p>
+
+  <hr class="regla">
+
+  <form class="umbral" id="forma" autocomplete="off">
+    <div>
+      <label class="aparato" for="claro">texto en claro (markdown simple)</label>
+      <textarea class="bloque" id="claro" spellcheck="false"></textarea>
+    </div>
+    <div>
+      <label class="aparato" for="frase">frase de paso</label>
+      <input type="text" id="frase" spellcheck="false" autocomplete="off">
+    </div>
+    <button type="submit">sellar</button>
+  </form>
+
+  <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+
+  <div id="salida" hidden>
+    <p class="aparato">pegar tal cual en camara/index.html, reemplazando el bloque &lt;script id="sello"&gt;</p>
+    <textarea class="bloque" id="bloque" readonly spellcheck="false" style="min-height:12rem"></textarea>
+    <p><button type="button" id="copiar">copiar</button></p>
+  </div>
+
+</main>
+
+<footer class="pie aparato">
+  <a href="index.html">← cámara</a>
+  <span class="hueco"></span>
+  <span>AÚN · R1 · 2026</span>
+</footer>
+
+<script src="../assets/js/aun.js"></script>
+<script src="../assets/js/camara.js"></script>
+<script>
+(function () {
+  'use strict';
+  var forma = document.getElementById('forma'),
+      claro = document.getElementById('claro'),
+      frase = document.getElementById('frase'),
+      aviso = document.getElementById('aviso'),
+      salida = document.getElementById('salida'),
+      bloque = document.getElementById('bloque'),
+      copiar = document.getElementById('copiar');
+
+  if (!AUN.camara || !AUN.camara.disponible()) {
+    aviso.textContent = 'este navegador no puede sellar (falta crypto.subtle: usa https o localhost)';
+    return;
+  }
+
+  forma.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var texto = claro.value, llave = frase.value;
+    if (!texto.trim() || llave.length < 8) {
+      aviso.textContent = 'hace falta texto y una frase de al menos 8 caracteres';
+      return;
+    }
+    aviso.textContent = 'sellando...';
+    AUN.camara.sellar(texto, llave).then(function (sello) {
+      bloque.value = '<script type="application/json" id="sello">'
+        + JSON.stringify(sello)
+        + '<\/script>';
+      salida.removeAttribute('hidden');
+      aviso.textContent = 'sellado. ' + sello.ct.length + ' caracteres de cifra.';
+    }).catch(function (e) {
+      aviso.textContent = 'no se pudo sellar: ' + e;
+    });
+  });
+
+  copiar.addEventListener('click', function () {
+    bloque.select();
+    try { document.execCommand('copy'); aviso.textContent = 'copiado'; }
+    catch (e) { aviso.textContent = 'copia manual'; }
+  });
+}());
+</script>
+</body>
+</html>

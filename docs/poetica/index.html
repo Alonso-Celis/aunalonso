@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es" data-idioma="es" data-modo="noche">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Poética — AÚN</title>
+<meta name="description" content="Reglas del archivo AÚN: el texto es la semilla, la página es el dato, nada gira en bucle.">
+<meta name="theme-color" content="#08070b">
+<script>
+(function(){try{var h=document.documentElement,i=localStorage.getItem('aun:idioma'),m=localStorage.getItem('aun:modo');
+if(!i)i=(navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en';
+h.setAttribute('data-idioma',i);h.setAttribute('lang',i);h.setAttribute('data-modo',m||'noche');}catch(e){}}());
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<link rel="stylesheet" href="../assets/css/aun.css">
+<style>
+  .documento{ max-width:44rem; margin:0 auto; padding:18vh clamp(1.2rem,6vw,2rem) 16vh; position:relative; z-index:1 }
+  .documento h1{ font-weight:200; font-size:clamp(2.2rem,1.4rem + 3.4vw,4rem); line-height:1; margin:0 0 1.6rem; color:var(--alto) }
+  .documento h2{ font-weight:300; font-size:1.5rem; color:var(--alto); margin:clamp(3rem,8vh,5rem) 0 1rem;
+                 padding-top:1rem; border-top:1px solid var(--linea) }
+  .documento h3{ font-family:var(--mono); font-weight:400; font-size:.7rem; letter-spacing:.2em;
+                 text-transform:uppercase; color:var(--tenue); margin:2.2rem 0 .6rem }
+  .documento p{ margin:0 0 1.1rem }
+  .documento ul,.documento ol{ margin:0 0 1.3rem; padding-left:1.3rem }
+  .documento li{ margin:0 0 .5rem }
+  .documento .clave{ color:var(--realce) }
+  .reglas{ list-style:none; padding:0; counter-reset:r }
+  .reglas > li{ counter-increment:r; display:grid; grid-template-columns:2.6rem 1fr; gap:1rem;
+                padding:1.1rem 0; border-bottom:1px solid var(--linea) }
+  .reglas > li::before{ content:"R" counter(r); font-family:var(--mono); font-size:.68rem;
+                        letter-spacing:.12em; color:var(--acento); padding-top:.45rem }
+  .reglas b{ color:var(--alto); font-weight:400 }
+  .tabla{ width:100%; border-collapse:collapse; margin:0 0 1.6rem; font-size:.94rem }
+  .tabla th,.tabla td{ text-align:left; padding:.7rem .6rem; border-bottom:1px solid var(--linea); vertical-align:top }
+  .tabla th{ font-family:var(--mono); font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
+             color:var(--tenue); font-weight:400 }
+  .envoltura{ overflow-x:auto }
+  .fases{ list-style:none; padding:0 }
+  .fases > li{ padding:1.2rem 0; border-bottom:1px solid var(--linea) }
+  .fases .cabeza{ font-family:var(--mono); font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:var(--acento) }
+  .fases .hecho{ color:var(--tenue) }
+</style>
+</head>
+<body data-obra="poetica">
+
+<header class="barra aparato">
+  <a class="sello" href="../index.html">AÚN</a>
+  <span class="hueco"></span>
+  <a href="../camara/index.html"><span data-t lang="es">cámara</span><span data-t lang="en">chamber</span></a>
+  <a href="../taller/index.html"><span data-t lang="es">taller</span><span data-t lang="en">workshop</span></a>
+  <span class="par">
+    <button type="button" data-accion="idioma" data-valor="es" aria-pressed="true">es</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="idioma" data-valor="en" aria-pressed="false">en</button>
+  </span>
+  <span class="par">
+    <button type="button" data-accion="modo" data-valor="noche" aria-pressed="true">noche</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="modo" data-valor="papel" aria-pressed="false">papel</button>
+  </span>
+</header>
+
+<main class="documento">
+
+<!-- ==================== ESPAÑOL ==================== -->
+<div data-t lang="es">
+
+  <p class="aparato">Poética · versión R1 · 2026</p>
+  <h1>AÚN</h1>
+
+  <p><span class="clave">Aún</span> quiere decir todavía: lo que no ha cesado. El archivo se llama
+  así porque su asunto es la persistencia — <em>tu voz que no cesa desde entonces</em> — y porque
+  un sitio de escritura debería comportarse como la memoria y no como una vitrina: acumular,
+  borrar mal, dejar residuos.</p>
+
+  <p>Propuesta en una frase: <b>un archivo de escrituras donde cada texto genera su propia forma
+  por reglas públicas y deterministas</b>. La forma no ilustra el texto. Lo lee. Y como la regla
+  es pública, la obra se puede discutir, refutar y continuar — eso es lo que la separa del
+  adorno generativo.</p>
+
+  <h2>Las reglas</h2>
+  <p>El sistema entero cabe en siete reglas. Están numeradas porque van a cambiar: la versión
+  actual del cuaderno de reglas es <b>R1</b>, y cada obra nueva puede añadir o corregir una.</p>
+
+  <ol class="reglas">
+    <li><span><b>El texto es la semilla.</b> El dibujo se calcula a partir del texto mismo:
+      un hash de sus letras alimenta el generador de azar. El mismo texto da siempre la misma
+      imagen. No hay azar de sesión, no hay «regenerar hasta que quede bonito».</span></li>
+    <li><span><b>La página es el dato.</b> El dibujo no lee una base de datos ni un JSON: lee el
+      DOM de la página que lo contiene. Si el texto cambia, la forma cambia. Si el texto
+      desaparece, la forma desaparece. No hay dos verdades.</span></li>
+    <li><span><b>Nada gira en bucle.</b> El tiempo es material: cada obra se deposita durante
+      unos treinta segundos y <em>se detiene</em>. Un bucle infinito es una promesa falsa de
+      vida. Aquí lo que hay es sedimento.</span></li>
+    <li><span><b>La negación borra, la adición deposita.</b> La sintaxis manda sobre la forma.
+      Una oración que niega se dibuja como sustracción; una que añade, como depósito. La
+      tabla de correspondencias está más abajo y es la parte revisable del sistema.</span></li>
+    <li><span><b>Una obra, un color.</b> Negro de sala, hueso para la letra y <em>un solo</em>
+      acento cromático por texto, tomado de su propia materia — en la obra 001, el púrpura del
+      cabello. Dos acentos serían decoración.</span></li>
+    <li><span><b>Dos lenguas, dos hermanas.</b> El español y el inglés no son la misma obra
+      traducida: cambian de semilla, y por lo tanto de imagen. Son hermanas. Cambiar de idioma
+      no traduce la página: la reescribe.</span></li>
+    <li><span><b>El acceso es un umbral, no un muro.</b> Los textos restringidos no se esconden:
+      se sellan. La cifra queda a la vista, pública e ilegible, y la llave se entrega a mano.
+      Un texto cerrado sigue siendo parte visible del archivo.</span></li>
+  </ol>
+
+  <h2>Tabla de correspondencias</h2>
+  <p>Esta es la parte que se puede discutir sin tocar la arquitectura. Cada tipo de oración
+  tiene un gesto en el plano, otro en el volumen y otro en el sonido.</p>
+
+  <div class="envoltura">
+  <table class="tabla">
+    <thead><tr><th>oración</th><th>plano (Canvas)</th><th>volumen (WebGL)</th><th>voz (SuperCollider)</th></tr></thead>
+    <tbody>
+      <tr><td>negación<br><span class="aparato">«No todo se trata…»</span></td>
+          <td>banda sustractiva: quita lo depositado y deja un residuo de un píxel</td>
+          <td>estrato ancho y erosionado, con un hueco en el centro</td>
+          <td>filtro que abre y se lleva parciales; silencio con cola</td></tr>
+      <tr><td>adición<br><span class="aparato">«También es…»</span></td>
+          <td>campo de filamentos púrpura, densidad proporcional a las palabras</td>
+          <td>núcleo denso desplazado del eje</td>
+          <td>parciales que entran y no se van</td></tr>
+      <tr><td>giro<br><span class="aparato">«…pero sí, también es esto»</span></td>
+          <td>vuelve a depositar; fija dos puntos en 0.382 y 0.618</td>
+          <td>campo alto y los dos ojos</td>
+          <td>la única entrada franca de amplitud</td></tr>
+      <tr><td>resto</td><td>línea</td><td>plano tenue</td><td>ruido de fondo</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>La altura de cada gesto no se elige: es la posición de esa oración dentro del texto,
+  medida en letras. La imagen es, literalmente, una lectura del texto en su propio orden.</p>
+
+  <h2>Materia</h2>
+  <ul>
+    <li><b>Negro</b> #08070b para la sala; <b>hueso</b> #e8e3da para la letra; <b>púrpura</b>
+      #7a3fd6 y su luz #c9a6ff para la obra 001.</li>
+    <li><b>Letra:</b> una romana de alto contraste para la escritura (Cormorant Garamond),
+      una monoespaciada para todo lo que no es obra — folios, fechas, avisos. El aparato
+      nunca se disfraza de literatura.</li>
+    <li><b>Modo papel:</b> la sala se apaga y queda la página. Leer largo en negro cansa;
+      un archivo de escritura tiene que dejarse leer.</li>
+    <li><b>Impresión:</b> cada texto está compuesto para imprimirse en negro sobre blanco,
+      sin la forma. La escritura tiene que sobrevivir sin el dibujo.</li>
+  </ul>
+
+  <h2>Fases</h2>
+  <ol class="fases">
+    <li><p class="cabeza">Fase 0 · base sólida <span class="hecho">— hecha</span></p>
+      <p>Sitio estático en GitHub Pages, sin dependencias, sin analítica, sin cookies.
+      Canvas 2D. Un compilador de cuarenta líneas (<code>tools/build.py</code>) aplica la tabla
+      de reglas a los <code>.md</code> y escribe el análisis en el HTML. Cámara sellada.
+      Lector que da forma a cualquier texto del archivo sin página propia.</p></li>
+    <li><p class="cabeza">Fase 1 · el taller</p>
+      <p>Salas en WebGL con <b>three.js</b> (la primera ya está en pie). Estudios en
+      <b>Processing</b> para lo que la pantalla no da: grabado, plotter, gran formato, tinta.
+      <b>SuperCollider</b> para la voz — piezas cortas, nunca automáticas, nunca en bucle.
+      Bocetos publicados en <b>OpenProcessing</b> como cuaderno abierto.</p></li>
+    <li><p class="cabeza">Fase 2 · dinámico</p>
+      <p>Acceso por persona y revocable: invitación por enlace firmado, una función de borde
+      (Cloudflare Pages Functions o equivalente) que entrega el texto sólo a quien fue invitado,
+      y la cifra actual como respaldo. Versiones del texto — el archivo muestra sus tachaduras.
+      Notas privadas de lectura.</p></li>
+    <li><p class="cabeza">Fase 3 · la edición</p>
+      <p>Serie numerada: cada obra existe como página, como impresión y como sonido.
+      Lo impreso se tira del mismo código que lo pintado en pantalla, con la misma semilla:
+      una sola regla, tres soportes.</p></li>
+  </ol>
+
+  <h2>Lo que este sitio no va a hacer</h2>
+  <ul>
+    <li>Ninguna animación en bucle infinito.</li>
+    <li>Ninguna imagen de banco, ninguna ilustración del texto: sólo reglas.</li>
+    <li>Ningún sonido que empiece solo.</li>
+    <li>Ninguna analítica, ningún rastreador, ningún aviso de cookies.</li>
+    <li>Ningún texto de relleno: si un hueco no tiene texto, se queda vacío.</li>
+  </ul>
+
+  <h2>Protocolo de evolución</h2>
+  <ol>
+    <li>El texto entra como <code>.md</code> en <code>docs/</code>. Es la única fuente.</li>
+    <li><code>python tools/build.py</code> parte el texto en oraciones, las clasifica y escribe
+      el resultado en el HTML.</li>
+    <li>Si el texto pide forma propia, nace una carpeta en <code>docs/obra/</code> con su
+      sketch. Si no, el lector le da forma con las reglas comunes.</li>
+    <li>Toda obra nueva que necesite un gesto nuevo <b>añade una regla a este documento</b> y
+      sube la versión del cuaderno: R1 → R2. El sitio evoluciona por reglas, no por estilos.</li>
+  </ol>
+
+  <p class="aparato">Alonso Celis · Paris · <a href="../index.html">archivo</a> ·
+    <a href="../taller/index.html">taller</a> · <a href="../camara/index.html">cámara</a></p>
+</div>
+
+<!-- ==================== ENGLISH ==================== -->
+<div data-t lang="en">
+
+  <p class="aparato">Poetics · version R1 · 2026</p>
+  <h1>AÚN</h1>
+
+  <p><span class="clave">Aún</span> is Spanish for <em>still</em>, <em>yet</em>: that which has
+  not ceased. The archive takes its name from that, because its subject is persistence —
+  <em>your voice that has not ceased since then</em> — and because a site for writing should
+  behave like memory rather than like a display case: accumulate, erase badly, leave residue.</p>
+
+  <p>The proposal in one sentence: <b>an archive of writings where each text generates its own
+  form through public, deterministic rules</b>. The form does not illustrate the text. It reads
+  it. And because the rule is public, the work can be argued with, refuted and continued —
+  which is what separates it from generative decoration.</p>
+
+  <h2>The rules</h2>
+  <p>The whole system fits in seven rules. They are numbered because they will change: the
+  current version of the rulebook is <b>R1</b>, and every new work may add or correct one.</p>
+
+  <ol class="reglas">
+    <li><span><b>The text is the seed.</b> The drawing is computed from the text itself: a hash
+      of its letters feeds the random generator. The same text always yields the same image.
+      No per-session randomness, no “regenerate until it looks nice”.</span></li>
+    <li><span><b>The page is the data.</b> The drawing reads no database and no JSON: it reads
+      the DOM of the page holding it. If the text changes, the form changes. If the text goes,
+      the form goes. There are never two truths.</span></li>
+    <li><span><b>Nothing loops.</b> Time is material: each work deposits itself over some thirty
+      seconds and then <em>stops</em>. An infinite loop is a false promise of life. What there
+      is here is sediment.</span></li>
+    <li><span><b>Negation erases, addition deposits.</b> Syntax governs form. A sentence that
+      negates is drawn as subtraction; one that adds, as deposit. The table of correspondences
+      is below, and it is the revisable part of the system.</span></li>
+    <li><span><b>One work, one colour.</b> Room black, bone white for the letter, and
+      <em>a single</em> chromatic accent per text, taken from its own matter — in work 001,
+      the purple of the hair. Two accents would be decoration.</span></li>
+    <li><span><b>Two languages, two sisters.</b> Spanish and English are not the same work
+      translated: they take different seeds, therefore different images. They are sisters.
+      Switching language does not translate the page: it rewrites it.</span></li>
+    <li><span><b>Access is a threshold, not a wall.</b> Restricted texts are not hidden: they
+      are sealed. The cipher stays in plain sight, public and unreadable, and the key is handed
+      over in person. A closed text remains a visible part of the archive.</span></li>
+  </ol>
+
+  <h2>Table of correspondences</h2>
+  <p>This is the part that can be argued with without touching the architecture. Each sentence
+  type has a gesture in the plane, another in volume, another in sound.</p>
+
+  <div class="envoltura">
+  <table class="tabla">
+    <thead><tr><th>sentence</th><th>plane (Canvas)</th><th>volume (WebGL)</th><th>voice (SuperCollider)</th></tr></thead>
+    <tbody>
+      <tr><td>negation<br><span class="aparato">“Not everything is about…”</span></td>
+          <td>subtractive band: removes what was deposited, leaves a one-pixel residue</td>
+          <td>wide eroded stratum with a hole at the centre</td>
+          <td>a filter that opens and carries partials away; silence with a tail</td></tr>
+      <tr><td>addition<br><span class="aparato">“It is also…”</span></td>
+          <td>field of purple filaments, density proportional to word count</td>
+          <td>dense core, offset from the axis</td>
+          <td>partials that enter and do not leave</td></tr>
+      <tr><td>turn<br><span class="aparato">“…but yes, this too”</span></td>
+          <td>deposits again; fixes two points at 0.382 and 0.618</td>
+          <td>high field and the two eyes</td>
+          <td>the only frank entrance of amplitude</td></tr>
+      <tr><td>rest</td><td>a line</td><td>faint plane</td><td>background noise</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>The height of each gesture is not chosen: it is that sentence's position inside the text,
+  measured in letters. The image is, literally, a reading of the text in its own order.</p>
+
+  <h2>Matter</h2>
+  <ul>
+    <li><b>Black</b> #08070b for the room; <b>bone</b> #e8e3da for the letter; <b>purple</b>
+      #7a3fd6 and its light #c9a6ff for work 001.</li>
+    <li><b>Type:</b> a high-contrast roman for the writing (Cormorant Garamond), a monospace for
+      everything that is not the work — folios, dates, notices. The apparatus never disguises
+      itself as literature.</li>
+    <li><b>Paper mode:</b> the room goes out and the page remains. Long reading on black is
+      tiring; an archive of writing has to let itself be read.</li>
+    <li><b>Print:</b> every text is set to print black on white, without the form. The writing
+      has to survive without the drawing.</li>
+  </ul>
+
+  <h2>Phases</h2>
+  <ol class="fases">
+    <li><p class="cabeza">Phase 0 · solid base <span class="hecho">— done</span></p>
+      <p>Static site on GitHub Pages: no dependencies, no analytics, no cookies. Canvas 2D.
+      A forty-line compiler (<code>tools/build.py</code>) applies the rule table to the
+      <code>.md</code> files and writes the analysis into the HTML. Sealed chamber. A reader
+      that gives form to any text in the archive without a page of its own.</p></li>
+    <li><p class="cabeza">Phase 1 · the workshop</p>
+      <p>WebGL rooms with <b>three.js</b> (the first one already stands). Studies in
+      <b>Processing</b> for what the screen cannot give: engraving, plotter, large format, ink.
+      <b>SuperCollider</b> for the voice — short pieces, never automatic, never looped.
+      Sketches published on <b>OpenProcessing</b> as an open notebook.</p></li>
+    <li><p class="cabeza">Phase 2 · dynamic</p>
+      <p>Per-person, revocable access: invitation by signed link, an edge function
+      (Cloudflare Pages Functions or equivalent) that hands the text only to the invited, with
+      today's cipher as fallback. Versions of a text — the archive shows its crossings-out.
+      Private reading notes.</p></li>
+    <li><p class="cabeza">Phase 3 · the edition</p>
+      <p>A numbered series: each work exists as page, as print and as sound. The print is
+      pulled from the same code as the screen, with the same seed: one rule, three supports.</p></li>
+  </ol>
+
+  <h2>What this site will not do</h2>
+  <ul>
+    <li>No infinite loops.</li>
+    <li>No stock imagery, no illustration of the text: rules only.</li>
+    <li>No sound that starts by itself.</li>
+    <li>No analytics, no trackers, no cookie notice.</li>
+    <li>No filler text: an empty slot stays empty.</li>
+  </ul>
+
+  <h2>Protocol of evolution</h2>
+  <ol>
+    <li>A text enters as <code>.md</code> in <code>docs/</code>. That is the only source.</li>
+    <li><code>python tools/build.py</code> splits it into sentences, classifies them and writes
+      the result into the HTML.</li>
+    <li>If the text asks for a form of its own, a folder is born in <code>docs/obra/</code> with
+      its sketch. If not, the reader gives it form with the common rules.</li>
+    <li>Any new work that needs a new gesture <b>adds a rule to this document</b> and bumps the
+      rulebook: R1 → R2. The site evolves by rules, not by styles.</li>
+  </ol>
+
+  <p class="aparato">Alonso Celis · Paris · <a href="../index.html">archive</a> ·
+    <a href="../taller/index.html">workshop</a> · <a href="../camara/index.html">chamber</a></p>
+</div>
+
+</main>
+
+<footer class="pie aparato">
+  <a href="../index.html">← <span data-t lang="es">archivo</span><span data-t lang="en">archive</span></a>
+  <span class="hueco"></span>
+  <span>AÚN · R1 · 2026</span>
+</footer>
+
+<script src="../assets/js/aun.js"></script>
+</body>
+</html>
