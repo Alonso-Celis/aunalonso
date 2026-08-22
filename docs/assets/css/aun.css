@@ -123,6 +123,14 @@ html[data-modo="papel"] .portada h1{ mix-blend-mode:normal; color:var(--tinta) }
 .o[data-tipo="ad"]{ color:var(--alto) }
 .o[data-tipo="giro"]{ color:var(--realce); font-style:italic; font-size:1.06em }
 .o[data-tipo="resto"]{ color:var(--texto) }
+/* apartado de una carta: 1. Introduccion. */
+h3.seccion{
+  font-family:var(--mono); font-weight:400; font-size:.66rem; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--acento);
+  margin:clamp(2.8rem,7vh,4.6rem) 0 1.3rem; padding-bottom:.5rem;
+  border-bottom:1px solid var(--linea);
+}
+h3.seccion:first-child{ margin-top:0 }
 .firma{
   margin:clamp(2.4rem,6vh,4rem) 0 0; font-family:var(--mono); font-size:.68rem;
   letter-spacing:.2em; text-transform:uppercase; color:var(--tenue); line-height:2;

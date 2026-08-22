@@ -122,6 +122,11 @@ class Texto(object):
                   % (self.lang, self.archivo)]
         n = 0
         for p in self.parrafos:
+            if p.startswith('#'):
+                # un apartado de la carta: 1. Introduccion.
+                salida.append('    <h3 class="seccion">%s</h3>'
+                              % escapar(p.lstrip('#').strip()))
+                continue
             if re.match(r'^(alonso|a\.)\b', p, re.I) and p is self.parrafos[-1]:
                 salida.append('    <p class="firma">%s</p>'
                               % '<br>'.join(escapar(l.strip()) for l in p.split('\n')))
@@ -162,12 +167,25 @@ def main(argv):
     cambios = []
 
     # 1. corpus
+    #    docs/*.md          -> el archivo, listado en el atrio
+    #    docs/<seccion>/*.md -> texto no listado: tiene pagina y ruta propias,
+    #                          pero no aparece en el indice. Para compartir a mano.
     textos = {}
-    for nombre in sorted(os.listdir(DOCS)):
-        if not nombre.lower().endswith('.md') or nombre.lower() in IGNORAR:
-            continue
-        t = Texto(os.path.join(DOCS, nombre))
+
+    def recoge(ruta, listado):
+        t = Texto(ruta)
+        t.listado = listado
         textos.setdefault(t.slug, {})[t.lang] = t
+
+    for nombre in sorted(os.listdir(DOCS)):
+        camino = os.path.join(DOCS, nombre)
+        if os.path.isfile(camino):
+            if nombre.lower().endswith('.md') and nombre.lower() not in IGNORAR:
+                recoge(camino, True)
+        elif os.path.isdir(camino) and nombre not in ('assets', '.git'):
+            for sub in sorted(os.listdir(camino)):
+                if sub.lower().endswith('.md') and sub.lower() not in IGNORAR:
+                    recoge(os.path.join(camino, sub), False)
 
     # 2. paginas que declaran un texto fuente (obra, sala, camara...)
     paginas = []          # [(slug, ruta)]
@@ -211,6 +229,8 @@ def main(argv):
     orden = sorted(textos.items(), key=lambda kv: max(t.orden for t in kv[1].values()), reverse=True)
     for slug, porLang in orden:
         t = porLang.get('es') or list(porLang.values())[0]
+        if not any(getattr(x, 'listado', True) for x in porLang.values()):
+            continue                      # texto no listado: no entra en el atrio
         langs = '/'.join(sorted(porLang.keys()))
         if slug in obras:
             rel = os.path.relpath(os.path.dirname(obras[slug]), DOCS).replace(os.sep, '/')
