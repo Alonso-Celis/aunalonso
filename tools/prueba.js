@@ -203,8 +203,8 @@ print('\n--- atrio (indice de 11 entradas) ---');
 load('docs/assets/js/atrio.js');
 if (typeof AUN.atrio !== 'function') { print('  FALLA no se exporta el sketch del atrio'); }
 else {
-  var titulos = ['No todo se trata','Habito','22.04.2022','No','Similitud','Mathilde',
-                 'Mathilde','Titre inconnu','Las esquirlas de Buttes Chaumont','Inconnu','Titre inconnu'];
+  var titulos = ['No todo se trata','Habito','22.04.2022','No','Similitud','M',
+                 'M','Titre inconnu','Las esquirlas de Buttes Chaumont','Inconnu','Titre inconnu'];
   var tipos = ['ad','resto','resto','resto','resto','resto','resto','resto','resto','resto','neg'];
   var ors = titulos.map(function (t, i) { return AUN.medir(t + ' 2020 es', tipos[i]); });
   var e2 = { w: 1200, h: 2400, min: 1200, dpr: 2, rand: AUN.rng(7), ruido: AUN.ruido(AUN.rng(11)),
