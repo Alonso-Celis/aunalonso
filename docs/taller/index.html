@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es" data-idioma="es" data-modo="noche">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Taller — AÚN</title>
+<meta name="description" content="El taller de AÚN: Canvas, three.js, Processing y SuperCollider al servicio de una sola regla.">
+<meta name="theme-color" content="#08070b">
+<script>
+(function(){try{var h=document.documentElement,i=localStorage.getItem('aun:idioma'),m=localStorage.getItem('aun:modo');
+if(!i)i=(navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en';
+h.setAttribute('data-idioma',i);h.setAttribute('lang',i);h.setAttribute('data-modo',m||'noche');}catch(e){}}());
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<link rel="stylesheet" href="../assets/css/aun.css">
+<style>
+  .documento{ max-width:46rem; margin:0 auto; padding:18vh clamp(1.2rem,6vw,2rem) 16vh; position:relative; z-index:1 }
+  .documento h1{ font-weight:200; font-size:clamp(2.2rem,1.4rem + 3.4vw,4rem); line-height:1; margin:0 0 1.4rem; color:var(--alto) }
+  .documento p{ margin:0 0 1.1rem }
+  .banco{ list-style:none; padding:0; margin:0 }
+  .banco > li{ padding:1.6rem 0; border-top:1px solid var(--linea) }
+  .banco h2{ font-weight:300; font-size:1.4rem; color:var(--alto); margin:0 0 .2rem }
+  .banco .papel{ font-family:var(--mono); font-size:.64rem; letter-spacing:.18em;
+                 text-transform:uppercase; color:var(--acento); margin:0 0 .8rem }
+  .banco code{ font-family:var(--mono); font-size:.84em; color:var(--realce) }
+  .banco .via{ font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; color:var(--tenue) }
+</style>
+</head>
+<body data-obra="taller">
+
+<header class="barra aparato">
+  <a class="sello" href="../index.html">AÚN</a>
+  <span class="hueco"></span>
+  <a href="../poetica/index.html"><span data-t lang="es">poética</span><span data-t lang="en">poetics</span></a>
+  <a href="../sala/index.html"><span data-t lang="es">sala 001</span><span data-t lang="en">room 001</span></a>
+  <span class="par">
+    <button type="button" data-accion="idioma" data-valor="es" aria-pressed="true">es</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="idioma" data-valor="en" aria-pressed="false">en</button>
+  </span>
+  <span class="par">
+    <button type="button" data-accion="modo" data-valor="noche" aria-pressed="true">noche</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="modo" data-valor="papel" aria-pressed="false">papel</button>
+  </span>
+</header>
+
+<main class="documento">
+
+<div data-t lang="es">
+  <p class="aparato">Taller · R1 · 2026</p>
+  <h1>Taller</h1>
+  <p>Una sola regla, varios oficios. Cada herramienta está aquí porque hace algo que las otras
+  no pueden hacer, no porque exista. La regla — el texto es la semilla — no cambia al cambiar
+  de herramienta; cambia la materia.</p>
+
+  <ul class="banco">
+    <li>
+      <p class="papel">pantalla · el sitio entero</p>
+      <h2>Canvas 2D, sin dependencias</h2>
+      <p>El motor propio: <code>assets/js/aun.js</code> (semilla, ruido, partitura de gestos)
+      y un sketch por obra. Sin librerías, sin compilación, sin red. Es lo que garantiza que
+      el archivo siga abriéndose en diez años.</p>
+      <p class="via">ver <a href="../obra/001-no-todo-se-trata/">obra 001</a> ·
+      <a href="../leer/?t=habito_18-08-2024.md">el lector aplicado a un texto antiguo</a></p>
+    </li>
+    <li>
+      <p class="papel">volumen · profundidad y cuerpo</p>
+      <h2>three.js</h2>
+      <p>Las <b>salas</b>: el mismo texto, un estrato por oración en el eje z. Sirve para lo que
+      el plano no da — atravesar el texto, ponerse dentro. Se carga desde CDN y sólo en las
+      salas: el resto del sitio no depende de ella.</p>
+      <p class="via">entrar en la <a href="../sala/index.html">sala 001</a></p>
+    </li>
+    <li>
+      <p class="papel">tinta · grabado, plotter, gran formato</p>
+      <h2>Processing</h2>
+      <p>Lo que la pantalla no puede: A4 a 300&nbsp;ppp, línea de plotter en SVG, tirajes.
+      Reimplementa el mismo hash y el mismo generador de azar sobre las mismas unidades UTF-16,
+      así que el papel y la pantalla son la misma composición. Con una traducción de materia:
+      en pantalla la negación borra; en papel no se puede quitar tinta, así que la negación
+      cubre con el color del papel.</p>
+      <p class="via">fuente: <a href="processing/no_todo_estratos/no_todo_estratos.pde">no_todo_estratos.pde</a>
+      · <code>PLOTTER = true</code> para SVG de línea</p>
+    </li>
+    <li>
+      <p class="papel">oído · la voz que no cesa</p>
+      <h2>SuperCollider</h2>
+      <p>La lectura en el tiempo: la negación es un filtro que se lleva parciales, la adición es
+      un parcial que entra y no se va, el giro es la única entrada franca de amplitud. Ocurre una
+      vez, decae y se libera — nunca en bucle, nunca automático. Del taller salen piezas cortas
+      que después se publican como archivo, no como reproductor que arranca solo.</p>
+      <p class="via">fuente: <a href="supercollider/aun_voz.scd">aun_voz.scd</a></p>
+    </li>
+    <li>
+      <p class="papel">cuaderno · lo que todavía no es obra</p>
+      <h2>OpenProcessing</h2>
+      <p>Los bocetos viven fuera, en abierto, con su fecha y su error a la vista. Aquí entra sólo
+      lo que ya obedece una regla. El cuaderno es público a propósito: la regla se discute mejor
+      cuando se ve fallar.</p>
+      <p class="via"><a href="https://openprocessing.org/discover/#/generativeart">openprocessing.org</a>
+      · <a href="https://processing.org/">processing.org</a>
+      · <a href="https://threejs.org/">threejs.org</a>
+      · <a href="https://supercollider.github.io/">supercollider.github.io</a></p>
+    </li>
+  </ul>
+</div>
+
+<div data-t lang="en">
+  <p class="aparato">Workshop · R1 · 2026</p>
+  <h1>Workshop</h1>
+  <p>One rule, several trades. Each tool is here because it does something the others cannot,
+  not because it exists. The rule — the text is the seed — does not change when the tool
+  changes; the matter changes.</p>
+
+  <ul class="banco">
+    <li>
+      <p class="papel">screen · the whole site</p>
+      <h2>Canvas 2D, no dependencies</h2>
+      <p>The engine is ours: <code>assets/js/aun.js</code> (seed, noise, score of gestures) plus
+      one sketch per work. No libraries, no build step, no network. That is what guarantees the
+      archive still opens in ten years.</p>
+      <p class="via">see <a href="../obra/001-no-todo-se-trata/">work 001</a> ·
+      <a href="../leer/?t=habito_18-08-2024.md">the reader applied to an older text</a></p>
+    </li>
+    <li>
+      <p class="papel">volume · depth and body</p>
+      <h2>three.js</h2>
+      <p>The <b>rooms</b>: the same text, one stratum per sentence along z. For what the plane
+      cannot give — walking through the text, standing inside it. Loaded from a CDN and only in
+      the rooms: the rest of the site does not depend on it.</p>
+      <p class="via">enter <a href="../sala/index.html">room 001</a></p>
+    </li>
+    <li>
+      <p class="papel">ink · engraving, plotter, large format</p>
+      <h2>Processing</h2>
+      <p>What the screen cannot do: A4 at 300&nbsp;dpi, plotter line work as SVG, editions.
+      It reimplements the same hash and the same random generator over the same UTF-16 units,
+      so paper and screen are the same composition. With one translation of matter: on screen
+      negation erases; on paper you cannot remove ink, so negation covers with the colour of
+      the paper.</p>
+      <p class="via">source: <a href="processing/no_todo_estratos/no_todo_estratos.pde">no_todo_estratos.pde</a>
+      · <code>PLOTTER = true</code> for line SVG</p>
+    </li>
+    <li>
+      <p class="papel">ear · the voice that has not ceased</p>
+      <h2>SuperCollider</h2>
+      <p>The reading in time: negation is a filter that carries partials away, addition is a
+      partial that enters and does not leave, the turn is the only frank entrance of amplitude.
+      It happens once, decays and frees itself — never looped, never automatic. The workshop
+      yields short pieces, later published as files, not as a player that starts by itself.</p>
+      <p class="via">source: <a href="supercollider/aun_voz.scd">aun_voz.scd</a></p>
+    </li>
+    <li>
+      <p class="papel">notebook · what is not yet a work</p>
+      <h2>OpenProcessing</h2>
+      <p>Sketches live outside, in the open, with their date and their errors visible. Only what
+      already obeys a rule comes in here. The notebook is public on purpose: a rule is easier to
+      argue with when you can watch it fail.</p>
+      <p class="via"><a href="https://openprocessing.org/discover/#/generativeart">openprocessing.org</a>
+      · <a href="https://processing.org/">processing.org</a>
+      · <a href="https://threejs.org/">threejs.org</a>
+      · <a href="https://supercollider.github.io/">supercollider.github.io</a></p>
+    </li>
+  </ul>
+</div>
+
+</main>
+
+<footer class="pie aparato">
+  <a href="../index.html">← <span data-t lang="es">archivo</span><span data-t lang="en">archive</span></a>
+  <span class="hueco"></span>
+  <span>AÚN · R1 · 2026</span>
+</footer>
+
+<script src="../assets/js/aun.js"></script>
+</body>
+</html>

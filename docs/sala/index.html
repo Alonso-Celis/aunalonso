@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es" data-idioma="es" data-modo="noche">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sala 001 — AÚN</title>
+<meta name="description" content="Sala: el texto como volumen. Estratos en profundidad, uno por oración.">
+<meta name="theme-color" content="#08070b">
+<!-- AUN:FUENTE no_todo_se_trata_2026 -->
+<script>
+(function(){try{var h=document.documentElement,i=localStorage.getItem('aun:idioma'),m=localStorage.getItem('aun:modo');
+if(!i)i=(navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en';
+h.setAttribute('data-idioma',i);h.setAttribute('lang',i);h.setAttribute('data-modo',m||'noche');}catch(e){}}());
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<link rel="stylesheet" href="../assets/css/aun.css">
+<style>
+  #sala{ position:fixed; inset:0; z-index:0 }
+  #sala canvas{ display:block; width:100%; height:100% }
+  .rotulo{ position:fixed; z-index:2; bottom:1.4rem; left:clamp(1rem,4vw,2.6rem); max-width:22rem }
+  .aviso-sala{ position:fixed; z-index:2; top:50%; left:50%; translate:-50% -50%; text-align:center }
+</style>
+</head>
+<body data-obra="sala-001">
+
+<div id="sala" aria-hidden="true"></div>
+
+<header class="barra aparato">
+  <a class="sello" href="../index.html">AÚN</a>
+  <span class="hueco"></span>
+  <a href="../obra/001-no-todo-se-trata/"><span data-t lang="es">obra 001</span><span data-t lang="en">work 001</span></a>
+  <span class="par">
+    <button type="button" data-accion="idioma" data-valor="es" aria-pressed="true">es</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="idioma" data-valor="en" aria-pressed="false">en</button>
+  </span>
+</header>
+
+<p class="aviso aviso-sala aparato" id="aviso-sala">
+  <span data-t lang="es">entrando en la sala…</span>
+  <span data-t lang="en">entering the room…</span>
+</p>
+
+<p class="rotulo aparato">
+  <span data-t lang="es">Sala 001 · el texto como volumen · un estrato por oración · WebGL</span>
+  <span data-t lang="en">Room 001 · the text as volume · one stratum per sentence · WebGL</span>
+</p>
+
+<!-- el texto vive aqui aunque no se muestre: la sala lo lee del DOM (R2) -->
+<div hidden>
+  <!-- AUN:TEXTO es -->
+  <div data-texto lang="es" data-reglas="R1" data-fuente="no_todo_se_trata_2026.es.md">
+      <p class="o" data-tipo="neg" data-n="1">No todo se trata del reciente corte de cabello púrpura.</p>
+      <p class="o" data-tipo="neg" data-n="2">No todo se trata de la mirada que por instantes se clava en el lente de la cámara con la certeza de que el espectador se queda sin palabras.</p>
+      <p class="o" data-tipo="neg" data-n="3">No todo se trata de la perfecta chaqueta oscura.</p>
+      <p class="o" data-tipo="neg" data-n="4">No todo se trata de eso.</p>
+      <p class="o" data-tipo="ad" data-n="5">También es el encuentro inesperado de días atrás.</p>
+      <p class="o" data-tipo="ad" data-n="6">También es la conversación breve frente a una artista.</p>
+      <p class="o" data-tipo="ad" data-n="7">También es tu voz que no cesa desde entonces.</p>
+      <p class="o" data-tipo="giro" data-n="8">No todo se trata de esto pero sí, también es esto lo que yo veo en la imagen, tu cabello púrpura, tu perfecta chaqueta negra, tus ojos en el lugar exacto y la remembranza nítida de tu voz.</p>
+      <p class="firma">Alonso,<br>Paris 2026</p>
+    </div>
+  <!-- /AUN:TEXTO es -->
+  <!-- AUN:TEXTO en -->
+  <div data-texto lang="en" data-reglas="R1" data-fuente="no_todo_se_trata_2026.en.md">
+      <p class="o" data-tipo="neg" data-n="1">Not everything is about the recent purple haircut.</p>
+      <p class="o" data-tipo="neg" data-n="2">Not everything is about the gaze that for brief moments locks onto the camera lens knowing that the viewer is left speechless.</p>
+      <p class="o" data-tipo="neg" data-n="3">Not everything is about the perfect dark jacket.</p>
+      <p class="o" data-tipo="neg" data-n="4">Not everything is about that.</p>
+      <p class="o" data-tipo="ad" data-n="5">It is also the unexpected encounter from days ago.</p>
+      <p class="o" data-tipo="ad" data-n="6">It is also my conversation with the artist you are.</p>
+      <p class="o" data-tipo="ad" data-n="7">It is also your voice that has not ceased since then.</p>
+      <p class="o" data-tipo="giro" data-n="8">Not everything is about that, but yes, this too is what I see in the image, your purple hair, your perfect black jacket, your eyes in exact right place, and the vivid remembrance of your voice</p>
+      <p class="firma">Alonso,<br>Paris 2026</p>
+    </div>
+  <!-- /AUN:TEXTO en -->
+</div>
+
+<script src="../assets/js/aun.js"></script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js" } }
+</script>
+<script type="module">
+/* ============================================================
+   SALA 001 — el texto como volumen
+   Mismas reglas que el dibujo plano, en profundidad:
+     una oracion = un estrato en z, en orden de lectura
+     negacion    = estrato ancho y erosionado, con un hueco
+     adicion     = nucleo denso de purpura (la voz)
+     giro        = los dos ojos en 0.382 / 0.618
+   La camara llega y se detiene. Nada gira en bucle (R3).
+   ============================================================ */
+const aviso = document.getElementById('aviso-sala');
+let THREE;
+try {
+  THREE = await import('three');
+} catch (e) {
+  aviso.textContent = (AUN.idioma() === 'es')
+    ? 'la sala necesita red y un servidor web (three.js desde CDN)'
+    : 'the room needs network and a web server (three.js from CDN)';
+  throw e;
+}
+
+const PHI = 0.6180339887;
+const cont = document.getElementById('sala');
+const p = AUN.partitura();
+const os = p.oraciones.length ? p.oraciones : [AUN.medir('aun')];
+const semilla = AUN.hash(p.lang + '|' + p.texto);
+const R = AUN.rng(semilla);
+const pal = AUN.paleta();
+
+function col(hex) { return new THREE.Color(hex); }
+const cAcento = col(pal.acento), cLuz = col(pal.luz), cHueso = col(pal.hueso);
+
+const escena = new THREE.Scene();
+const camara = new THREE.PerspectiveCamera(38, 1, 0.1, 400);
+const render = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+render.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+cont.appendChild(render.domElement);
+
+/* --- estratos --- */
+const pos = [], colores = [];
+const HUECO = 2.6;
+const z0 = -(os.length - 1) * HUECO / 2;
+
+os.forEach((o, i) => {
+  const z = z0 + i * HUECO;
+  const r = AUN.rng(o.semilla);
+  const n = Math.min(2600, Math.max(180, Math.round(o.letras * 16)));
+  for (let k = 0; k < n; k++) {
+    let x, y, c;
+    if (o.tipo === 'neg') {
+      /* ancho, plano, con un hueco: lo borrado */
+      const a = r() * Math.PI * 2;
+      const rad = 2.2 + 5.4 * Math.sqrt(r());
+      x = Math.cos(a) * rad;
+      y = Math.sin(a) * rad * 0.42;
+      c = cHueso;
+      if (r() < 0.55) continue;               /* erosion */
+    } else if (o.tipo === 'ad') {
+      /* nucleo denso: la voz */
+      const a = r() * Math.PI * 2;
+      const rad = 2.0 * Math.pow(r(), 1.7);
+      x = Math.cos(a) * rad + (i % 2 ? 1 : -1) * 1.6;
+      y = Math.sin(a) * rad * 1.5;
+      c = r() < 0.3 ? cLuz : cAcento;
+    } else if (o.tipo === 'giro') {
+      /* el giro: campo alto y los dos ojos */
+      if (k % 9 === 0) {
+        const ojo = (k / 9) % 2 ? PHI : -(1 - PHI);
+        x = ojo * 7.2;
+        y = 1.6 + (r() - 0.5) * 0.22;
+        c = cLuz;
+      } else {
+        x = (r() - 0.5) * 9.5;
+        y = (r() - 0.5) * 4.2 + 0.8;
+        c = r() < 0.5 ? cAcento : cHueso;
+      }
+    } else {
+      x = (r() - 0.5) * 8;
+      y = (r() - 0.5) * 3;
+      c = cHueso;
+    }
+    pos.push(x, y, z + (r() - 0.5) * HUECO * 0.5);
+    const g = 0.55 + 0.45 * r();
+    colores.push(c.r * g, c.g * g, c.b * g);
+  }
+});
+
+const geo = new THREE.BufferGeometry();
+geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+geo.setAttribute('color', new THREE.Float32BufferAttribute(colores, 3));
+const mat = new THREE.PointsMaterial({
+  size: 0.05, sizeAttenuation: true, vertexColors: true,
+  transparent: true, opacity: 0.92, depthWrite: false,
+  blending: THREE.AdditiveBlending
+});
+escena.add(new THREE.Points(geo, mat));
+
+/* eje aureo: una linea que declara la construccion */
+const ejeGeo = new THREE.BufferGeometry();
+ejeGeo.setAttribute('position', new THREE.Float32BufferAttribute(
+  [PHI * 7.2, -6, z0 - 3, PHI * 7.2, 6, -z0 + 3,
+   -(1 - PHI) * 7.2, -6, z0 - 3, -(1 - PHI) * 7.2, 6, -z0 + 3], 3));
+escena.add(new THREE.LineSegments(ejeGeo, new THREE.LineBasicMaterial({
+  color: cHueso, transparent: true, opacity: 0.09
+})));
+
+/* --- llegada de la camara: se detiene y se queda --- */
+const DE = new THREE.Vector3(9.5, 5.2, 26 + os.length * 1.1);
+const A = new THREE.Vector3(1.2 + R() * 0.8, 0.6, 9.5);
+const centro = new THREE.Vector3(0, 0.4, 0);
+let raton = { x: 0, y: 0 };
+let t0 = 0, listo = false, pendiente = false;
+const DUR = 42000;
+let quieto = false;
+try { quieto = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+function medir() {
+  const w = cont.clientWidth || window.innerWidth,
+        h = cont.clientHeight || window.innerHeight;
+  camara.aspect = w / h;
+  camara.updateProjectionMatrix();
+  render.setSize(w, h, false);
+}
+
+function pintar(k) {
+  const e = 1 - Math.pow(1 - k, 4);
+  camara.position.lerpVectors(DE, A, e);
+  camara.position.x += raton.x * 1.4;
+  camara.position.y += raton.y * 0.9;
+  camara.lookAt(centro);
+  render.render(escena, camara);
+}
+
+function paso(ts) {
+  if (!t0) t0 = ts;
+  const k = Math.min(1, (ts - t0) / DUR);
+  pintar(k);
+  if (k < 1) requestAnimationFrame(paso);
+  else { listo = true; document.body.setAttribute('data-final', ''); }
+}
+
+medir();
+aviso.textContent = '';
+if (quieto) { pintar(1); listo = true; }
+else requestAnimationFrame(paso);
+
+window.addEventListener('resize', () => { medir(); if (listo) pintar(1); });
+
+/* parallax: solo pinta cuando el raton se mueve. Nada gira solo. */
+window.addEventListener('pointermove', (ev) => {
+  raton.x = (ev.clientX / window.innerWidth - 0.5) * 0.5;
+  raton.y = -(ev.clientY / window.innerHeight - 0.5) * 0.5;
+  if (!listo || pendiente) return;
+  pendiente = true;
+  requestAnimationFrame(() => { pendiente = false; pintar(1); });
+});
+</script>
+</body>
+</html>
