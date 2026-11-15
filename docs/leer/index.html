@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" data-idioma="es" data-modo="noche">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leer — AÚN</title>
+<meta name="theme-color" content="#08070b">
+<script>
+(function(){try{var h=document.documentElement,i=localStorage.getItem('aun:idioma'),m=localStorage.getItem('aun:modo');
+if(!i)i=(navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en';
+h.setAttribute('data-idioma',i);h.setAttribute('lang',i);h.setAttribute('data-modo',m||'noche');}catch(e){}}());
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<link rel="stylesheet" href="../assets/css/aun.css">
+</head>
+<body data-obra="lector">
+
+<canvas class="lienzo" id="lienzo-lector" data-fijo aria-hidden="true" hidden></canvas>
+
+<header class="barra aparato">
+  <a class="sello" href="../index.html">AÚN</a>
+  <span class="hueco"></span>
+  <span class="par">
+    <button type="button" data-accion="idioma" data-valor="es" aria-pressed="true">es</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="idioma" data-valor="en" aria-pressed="false">en</button>
+  </span>
+  <span class="par">
+    <button type="button" data-accion="modo" data-valor="noche" aria-pressed="true">noche</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="modo" data-valor="papel" aria-pressed="false">papel</button>
+  </span>
+</header>
+
+<article class="lectura">
+  <header>
+    <p class="aparato">
+      <span data-t lang="es">Texto del archivo</span>
+      <span data-t lang="en">From the archive</span>
+      · <span id="fecha"></span>
+    </p>
+    <h2 id="titulo">—</h2>
+  </header>
+
+  <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+
+  <div id="abierto" data-texto hidden></div>
+
+  <hr class="regla">
+
+  <p class="nota aparato">
+    <span data-t lang="es">fuente</span><span data-t lang="en">source</span>:
+    <a id="fuente" href="#">—</a> ·
+    <span data-t lang="es">forma generada del texto · R1 · pulsa G para guardarla</span>
+    <span data-t lang="en">form generated from the text · R1 · press G to save it</span>
+  </p>
+</article>
+
+<footer class="pie aparato">
+  <a href="../index.html">← <span data-t lang="es">archivo</span><span data-t lang="en">archive</span></a>
+  <span class="hueco"></span>
+  <span>AÚN · R1 · 2026</span>
+</footer>
+
+<script src="../assets/js/aun.js"></script>
+<script src="../assets/js/obra-001.js"></script>
+<script src="../assets/js/camara.js"></script>
+<script src="../assets/js/lector.js"></script>
+</body>
+</html>

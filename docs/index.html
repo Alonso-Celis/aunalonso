@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" data-idioma="es" data-modo="noche">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AÚN — Alonso Celis</title>
+<meta name="description" content="AÚN. Archivo de escrituras de Alonso Celis y de las formas que esas escrituras generan.">
+<meta name="author" content="Alonso Celis">
+<meta name="theme-color" content="#08070b">
+<script>
+(function(){try{var h=document.documentElement,i=localStorage.getItem('aun:idioma'),m=localStorage.getItem('aun:modo');
+if(!i)i=(navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en';
+h.setAttribute('data-idioma',i);h.setAttribute('lang',i);h.setAttribute('data-modo',m||'noche');}catch(e){}}());
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<link rel="stylesheet" href="assets/css/aun.css">
+</head>
+<body data-obra="atrio">
+
+<canvas class="lienzo" id="lienzo-atrio" data-fijo aria-hidden="true"></canvas>
+
+<header class="barra aparato">
+  <a class="sello" href="index.html" aria-current="page">AÚN</a>
+  <span class="hueco"></span>
+  <a href="poetica/index.html"><span data-t lang="es">poética</span><span data-t lang="en">poetics</span></a>
+  <a href="taller/index.html"><span data-t lang="es">taller</span><span data-t lang="en">workshop</span></a>
+  <a href="camara/index.html"><span data-t lang="es">cámara</span><span data-t lang="en">chamber</span></a>
+  <span class="par">
+    <button type="button" data-accion="idioma" data-valor="es" aria-pressed="true">es</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="idioma" data-valor="en" aria-pressed="false">en</button>
+  </span>
+  <span class="par">
+    <button type="button" data-accion="modo" data-valor="noche" aria-pressed="true">noche</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="modo" data-valor="papel" aria-pressed="false">papel</button>
+  </span>
+</header>
+
+<main class="atrio">
+
+  <h1 class="lema">
+    <span data-t lang="es">AÚN.<br>Un archivo que no cesa: escrituras, y las formas que esas escrituras generan por sus propias reglas.</span>
+    <span data-t lang="en">AÚN.<br>An archive that has not ceased: writings, and the forms those writings generate by their own rules.</span>
+  </h1>
+
+  <p class="aparato" style="margin:0 0 1.2rem">
+    <span data-t lang="es">Corpus · <span id="cuenta">—</span> textos</span>
+    <span data-t lang="en">Corpus · <span>—</span> texts</span>
+  </p>
+
+  <!-- AUN:CORPUS -->
+  <ol class="corpus">
+    <li data-slug="no_todo_se_trata_2026" data-obra><a href="obra/001-no-todo-se-trata/"><span class="n">001</span><span class="t">No todo se trata</span><span class="meta">2026 · en/es</span></a></li>
+    <li data-slug="habito_18-08-2024"><a href="leer/?t=habito_18-08-2024.md"><span class="n">2024</span><span class="t">Habito</span><span class="meta">18.08.2024 · es</span></a></li>
+    <li data-slug="_22-04-2022"><a href="leer/?t=_22-04-2022.md"><span class="n">2022</span><span class="t">22.04.2022</span><span class="meta">22.04.2022 · es</span></a></li>
+    <li data-slug="no_19-04-2022"><a href="leer/?t=no_19-04-2022.md"><span class="n">2022</span><span class="t">No</span><span class="meta">19.04.2022 · es</span></a></li>
+    <li data-slug="similitud_14-10-2021"><a href="leer/?t=similitud_14-10-2021.md"><span class="n">2021</span><span class="t">Similitud</span><span class="meta">14.10.2021 · es</span></a></li>
+    <li data-slug="m_22-06-2021"><a href="leer/?t=m_22-06-2021.md"><span class="n">2021</span><span class="t">M</span><span class="meta">22.06.2021 · es</span></a></li>
+    <li data-slug="m_21-04-2021"><a href="leer/?t=m_21-04-2021.md"><span class="n">2021</span><span class="t">M</span><span class="meta">21.04.2021 · es</span></a></li>
+    <li data-slug="titre_inconnu_05-02-2020"><a href="leer/?t=titre_inconnu_05-02-2020.md"><span class="n">2020</span><span class="t">Titre inconnu</span><span class="meta">05.02.2020 · es</span></a></li>
+    <li data-slug="las_esquirlas_de_buttes_chaumont_2020"><a href="leer/?t=las_esquirlas_de_buttes_chaumont_2020.md"><span class="n">2020</span><span class="t">Las esquirlas de Buttes Chaumont</span><span class="meta">2020 · es</span></a></li>
+    <li data-slug="titre_inconnu_2020"><a href="leer/?t=titre_inconnu_2020.md"><span class="n">2020</span><span class="t">Inconnu</span><span class="meta">2020 · es</span></a></li>
+    <li data-slug="titre_inconnu_date-inconnue"><a href="leer/?t=titre_inconnu_date-inconnue.md"><span class="n">·</span><span class="t">Titre inconnu</span><span class="meta">date.inconnue · es</span></a></li>
+  </ol>
+  <!-- /AUN:CORPUS -->
+
+  <hr class="regla">
+
+  <section class="nota aparece">
+    <div data-t lang="es">
+      <p>Las entradas con <b>obra</b> tienen forma construida: el dibujo se deriva del texto
+      mismo, con una semilla tomada de sus letras, de modo que un texto produce siempre
+      su imagen y no otra. Las entradas sin obra son todavía sólo escritura —
+      la forma llega después, cuando el texto la pide.</p>
+      <p>Las reglas del archivo están en <a href="poetica/index.html">la poética</a>, y las
+      herramientas en <a href="taller/index.html">el taller</a>: Canvas para el sitio,
+      three.js para las <a href="sala/index.html">salas</a>, Processing para el grabado y el
+      plotter, SuperCollider para la voz.</p>
+    </div>
+    <div data-t lang="en">
+      <p>Entries marked <b>obra</b> have a constructed form: the drawing derives from the text
+      itself, seeded by its letters, so a text always yields its own image and no other.
+      Entries without a form are still only writing — the form arrives later,
+      when the text asks for it.</p>
+      <p>The rules of the archive are in <a href="poetica/index.html">the poetics</a>, and the
+      tools in <a href="taller/index.html">the workshop</a>: Canvas for the site, three.js for
+      the <a href="sala/index.html">rooms</a>, Processing for engraving and plotter output,
+      SuperCollider for the voice.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie aparato">
+  <span>Alonso Celis · Paris</span>
+  <span class="hueco"></span>
+  <a href="https://github.com/Alonso-Celis/aunalonso">github</a>
+  <span>R1 · 2026</span>
+</footer>
+
+<script src="assets/js/aun.js"></script>
+<script src="assets/js/atrio.js"></script>
+<script>
+(function(){var n=document.querySelectorAll('.corpus li').length,e=document.getElementById('cuenta');
+if(e)e.textContent=n;var s=document.querySelectorAll('[data-t][lang] span');
+Array.prototype.forEach.call(s,function(x){if(x.textContent==='—')x.textContent=n;});}());
+</script>
+</body>
+</html>

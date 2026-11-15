@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es" data-idioma="es" data-modo="noche">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cámara — AÚN</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#08070b">
+<script>
+(function(){try{var h=document.documentElement,i=localStorage.getItem('aun:idioma'),m=localStorage.getItem('aun:modo');
+if(!i)i=(navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en';
+h.setAttribute('data-idioma',i);h.setAttribute('lang',i);h.setAttribute('data-modo',m||'noche');}catch(e){}}());
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<link rel="stylesheet" href="../assets/css/aun.css">
+</head>
+<body data-obra="camara">
+
+<canvas class="lienzo" id="lienzo-camara" data-fijo aria-hidden="true" hidden></canvas>
+
+<header class="barra aparato">
+  <a class="sello" href="../index.html">AÚN</a>
+  <span class="hueco"></span>
+  <span class="par">
+    <button type="button" data-accion="idioma" data-valor="es" aria-pressed="true">es</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="idioma" data-valor="en" aria-pressed="false">en</button>
+  </span>
+  <span class="par">
+    <button type="button" data-accion="modo" data-valor="noche" aria-pressed="true">noche</button>
+    <span class="sep">/</span>
+    <button type="button" data-accion="modo" data-valor="papel" aria-pressed="false">papel</button>
+  </span>
+</header>
+
+<main class="camara">
+
+  <h1 class="lema" style="font-size:clamp(1.5rem,1.1rem + 1.4vw,2.2rem)">
+    <span data-t lang="es">Cámara</span>
+    <span data-t lang="en">Chamber</span>
+  </h1>
+
+  <p data-t lang="es" class="nota">
+    Estos textos no están escondidos: están <em>sellados</em>. La cifra queda a la vista,
+    pública e ilegible. La llave se entrega a mano, fuera de este sitio.
+  </p>
+  <p data-t lang="en" class="nota">
+    These texts are not hidden: they are <em>sealed</em>. The cipher stays in plain sight,
+    public and unreadable. The key is handed over in person, outside this site.
+  </p>
+
+  <hr class="regla">
+
+  <form class="umbral" id="umbral" autocomplete="off">
+    <div>
+      <label class="aparato" for="frase">
+        <span data-t lang="es">frase de paso</span>
+        <span data-t lang="en">passphrase</span>
+      </label>
+      <input type="password" id="frase" name="frase" spellcheck="false"
+             autocapitalize="off" autocomplete="current-password">
+    </div>
+    <button type="submit">
+      <span data-t lang="es">abrir</span>
+      <span data-t lang="en">open</span>
+    </button>
+  </form>
+
+  <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+
+  <!-- la cifra a la vista: la forma del texto ilegible -->
+  <p class="cifra" id="cifra" aria-hidden="true"></p>
+
+  <!-- El sello. Se genera con camara/sellar.html y se pega aqui tal cual. -->
+  <script type="application/json" id="sello">{}</script>
+
+  <div id="abierto" data-texto hidden></div>
+
+  <hr class="regla">
+
+  <p class="nota aparato" data-t lang="es">
+    AES-GCM 256 · PBKDF2-SHA256 · 310 000 iteraciones · todo en el navegador
+  </p>
+  <p class="nota aparato" data-t lang="en">
+    AES-GCM 256 · PBKDF2-SHA256 · 310,000 iterations · entirely in the browser
+  </p>
+  <p class="nota" data-t lang="es">
+    Límite conocido: la cifra es pública, así que la seguridad es la de la frase de paso.
+    Suficiente contra el lector casual y contra los buscadores; no contra un atacante
+    con tiempo. El acceso por persona y revocable llega en la fase 2
+    (ver <a href="../poetica/index.html">la poética</a>).
+    Para sellar un texto: <a href="sellar.html">sellar.html</a>.
+  </p>
+  <p class="nota" data-t lang="en">
+    Known limit: the cipher is public, so security is the security of the passphrase.
+    Enough against the casual reader and against search engines; not against a patient
+    attacker. Per-person, revocable access arrives in phase 2
+    (see <a href="../poetica/index.html">the poetics</a>).
+    To seal a text: <a href="sellar.html">sellar.html</a>.
+  </p>
+
+</main>
+
+<footer class="pie aparato">
+  <a href="../index.html">← <span data-t lang="es">archivo</span><span data-t lang="en">archive</span></a>
+  <span class="hueco"></span>
+  <span>AÚN · R1 · 2026</span>
+</footer>
+
+<script src="../assets/js/aun.js"></script>
+<script src="../assets/js/obra-001.js"></script>
+<script src="../assets/js/camara.js"></script>
+</body>
+</html>
