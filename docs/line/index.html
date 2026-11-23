@@ -1,121 +1,230 @@
 <!DOCTYPE html>
-<html lang="es" data-idioma="es" data-modo="noche">
+<html lang="es" data-modo="noche">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A Line Marsa · carta</title>
+<title>Line — AÚN</title>
+<meta name="author" content="Alonso Celis">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#08070b">
-<!-- AUN:FUENTE carta_a_line -->
 <script>
-(function(){try{var h=document.documentElement,i=localStorage.getItem('aun:idioma'),m=localStorage.getItem('aun:modo');
-if(!i)i=(navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en';
-h.setAttribute('data-idioma',i);h.setAttribute('lang',i);h.setAttribute('data-modo',m||'noche');}catch(e){}}());
+(function(){try{var m=localStorage.getItem('aun:modo');if(m)document.documentElement.setAttribute('data-modo',m);}catch(e){}}());
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=IBM+Plex+Mono:wght@300;400&display=swap">
-<link rel="stylesheet" href="../assets/css/aun.css">
 <style>
-  /* una carta no es una obra en sala: aqui no hay dibujo, solo letra */
-  .carta{ max-width:33rem; margin:0 auto; padding:16vh clamp(1.2rem,6vw,2rem) 18vh }
-  .carta > header{ margin-bottom:clamp(3rem,9vh,6rem) }
-  .carta h1{
-    font-weight:200; font-size:clamp(1.9rem,1.3rem + 2.2vw,3.1rem); line-height:1.08;
-    letter-spacing:-.01em; color:var(--alto); margin:.6rem 0 1.2rem; text-wrap:balance;
-  }
-  .carta .destino{ display:flex; gap:1.1rem; flex-wrap:wrap; align-items:baseline }
-  .carta .o{ line-height:1.78 }
-  .carta .cierre{ margin-top:clamp(3.4rem,9vh,5.6rem); border-top:1px solid var(--linea); padding-top:1.2rem }
+:root{
+  --noche:#08070b; --papel:#ece6dc; --tinta:#14131a; --acento:#7a3fd6; --luz:#c9a6ff; --hueso:#e8e3da;
+  --fondo:var(--noche); --texto:#cfc9c0; --alto:var(--hueso); --tenue:#6d6a75;
+  --linea:rgba(232,227,218,.12); --realce:var(--luz);
+  --serif:"Cormorant Garamond","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Consolas,monospace;
+  --medida:34rem; --paso:clamp(1.1rem,.8rem + 1vw,1.6rem);
+  --lento:1100ms cubic-bezier(.16,1,.3,1);
+}
+html[data-modo="papel"]{
+  --fondo:var(--papel); --texto:#2a2830; --alto:var(--tinta); --tenue:#8b8578;
+  --linea:rgba(20,19,26,.16); --realce:#4b1fa0;
+}
+*,*::before,*::after{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth }
+body{
+  margin:0; background:var(--fondo); color:var(--texto);
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(1.02rem,.95rem + .35vw,1.22rem); line-height:1.72;
+  font-feature-settings:"kern" 1,"liga" 1,"onum" 1;
+  transition:background var(--lento), color var(--lento); overflow-x:hidden;
+}
+::selection{ background:var(--acento); color:#fff }
+
+.aparato{ font-family:var(--mono); font-weight:400; font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--tenue) }
+.barra{
+  position:fixed; inset:0 0 auto 0; z-index:50;
+  display:flex; align-items:center; gap:1.4rem; flex-wrap:wrap;
+  padding:.95rem clamp(1rem,4vw,2.6rem);
+  background:linear-gradient(to bottom,var(--fondo) 62%,transparent);
+}
+.barra .sello{ letter-spacing:.42em; color:var(--alto); text-decoration:none }
+.hueco{ flex:1 1 auto }
+.barra button{
+  background:none; border:0; padding:.25rem .1rem; cursor:pointer;
+  font:inherit; letter-spacing:.2em; color:var(--tenue);
+  border-bottom:1px solid transparent; transition:color 400ms ease, border-color 400ms ease;
+}
+.barra button:hover,.barra button:focus-visible{ color:var(--alto); border-bottom-color:var(--acento); outline:none }
+.barra [aria-pressed="true"],.barra [aria-selected="true"]{ color:var(--alto) }
+.barra [aria-selected="true"]{ border-bottom-color:var(--acento) }
+.par{ display:inline-flex; gap:.55rem; align-items:baseline }
+.par .sep{ opacity:.35 }
+
+.escena{ position:relative; min-height:100svh; display:grid; place-items:center }
+.portada{ padding:0 clamp(1rem,6vw,5rem); max-width:min(92vw,52rem) }
+.portada h1{
+  margin:0; font-weight:200; letter-spacing:-.02em;
+  font-size:clamp(2.9rem,1.4rem + 8.5vw,8.4rem); line-height:.92;
+  color:var(--alto); text-wrap:balance;
+}
+.portada h1.largo{ font-size:clamp(2.2rem,1.2rem + 4.6vw,5.2rem); line-height:1 }
+.portada .credito{ margin:1.9rem 0 0; display:flex; gap:1.2rem; flex-wrap:wrap }
+.desliz{ position:absolute; bottom:1.6rem; left:50%; translate:-50% 0; text-decoration:none }
+.desliz::after{
+  content:""; display:block; width:1px; height:2.4rem; margin:.6rem auto 0;
+  background:linear-gradient(var(--linea),transparent);
+}
+
+.lectura{ max-width:var(--medida); margin:0 auto; padding:clamp(4rem,14vh,11rem) clamp(1.2rem,6vw,2rem) 22vh }
+.lectura > header{ margin-bottom:clamp(2.5rem,7vh,5rem); border-bottom:1px solid var(--linea); padding-bottom:1.1rem }
+.lectura h2{ font-weight:300; font-size:1.9rem; line-height:1.2; margin:.2rem 0 .8rem; color:var(--alto) }
+.o{ margin:0 0 var(--paso) }
+.poema .o{ color:var(--alto); margin-bottom:calc(var(--paso) * 1.4) }
+h3.seccion{
+  font-family:var(--mono); font-weight:400; font-size:.66rem; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--acento);
+  margin:clamp(2.8rem,7vh,4.6rem) 0 1.3rem; padding-bottom:.5rem; border-bottom:1px solid var(--linea);
+}
+h3.seccion:first-child{ margin-top:0 }
+.firma{ margin:clamp(2.4rem,6vh,4rem) 0 0; font-family:var(--mono); font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--tenue); line-height:2 }
+footer.pie{ padding:6vh clamp(1.2rem,6vw,4rem) 8vh; border-top:1px solid var(--linea); display:flex; gap:1.4rem; flex-wrap:wrap }
+
+@media (max-width:540px){ .barra{ gap:.9rem 1.1rem } }
+@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto } }
+@media print{
+  :root{ --fondo:#fff; --texto:#111; --alto:#000; --tenue:#555; --linea:#ccc }
+  .barra,.desliz,footer.pie{ display:none !important }
+  .escena{ min-height:auto; padding:2rem 0 }
+  .lectura{ padding:0; max-width:none }
+}
 </style>
 </head>
-<body data-obra="carta-line">
+<body>
 
 <header class="barra aparato">
-  <a class="sello" href="../index.html">AÚN</a>
+  <span class="sello">AÚN</span>
   <span class="hueco"></span>
+  <nav class="par" role="tablist" id="pestanas" aria-label="textos"></nav>
   <span class="par">
-    <button type="button" data-accion="idioma" data-valor="es" aria-pressed="true">es</button>
+    <button type="button" data-modo="noche" aria-pressed="true">noche</button>
     <span class="sep">/</span>
-    <button type="button" data-accion="idioma" data-valor="en" aria-pressed="false">en</button>
-  </span>
-  <span class="par">
-    <button type="button" data-accion="modo" data-valor="noche" aria-pressed="true">noche</button>
-    <span class="sep">/</span>
-    <button type="button" data-accion="modo" data-valor="papel" aria-pressed="false">papel</button>
+    <button type="button" data-modo="papel" aria-pressed="false">papel</button>
   </span>
 </header>
 
-<article class="carta">
-
-  <header>
-    <p class="destino aparato">
-      <span data-t lang="es">Carta · París · 2026</span>
-      <span data-t lang="en">Letter · Paris · 2026</span>
-      <span data-t lang="es">en curso</span>
-      <span data-t lang="en">in progress</span>
-    </p>
-    <h1>
-      <span data-t lang="es">A Line Marsa:<br>carta que nace del error.</span>
-      <span data-t lang="en">To Line Marsa:<br>a letter born of the error.</span>
-    </h1>
-  </header>
-
-  <!-- AUN:TEXTO es -->
-  <div data-texto lang="es" data-reglas="R1" data-fuente="carta_a_line.md">
-      <h3 class="seccion">1. Introducción.</h3>
-      <p class="o" data-tipo="resto" data-n="1">Allí estábamos, sentados, en el este de París, en una terraza desconocida para ambos.</p>
-      <p class="o" data-tipo="resto" data-n="2">Desde que salí del apartamento una mezcla de emoción y nerviosismo se hacía visible en mi cuerpo: no dejé de transpirar en el trayecto y la temperatura no era tan elevada.</p>
-      <p class="o" data-tipo="resto" data-n="3">Me temo que transpiraba mucho por la emoción y la incertidumbre del encuentro.</p>
-      <h3 class="seccion">2. Una nueva noción: «Demasiado».</h3>
-      <p class="o" data-tipo="resto" data-n="4">Rápidamente la conversación se transformó en una exploración de tus años previos a París, la intersección entre el mundo germano y el mundo de la antigua URSS del que vienen tus padres.</p>
-      <p class="o" data-tipo="resto" data-n="5">Conforme más avanzabas en tu narración, en tu encuentro con la Canción Francesa, en tu inclinación temprana por el canto pero sobre todo por la exploración del mundo de una manera poco habitual, conforme más lo hacías la intensidad de tus palabras generaba una especie de universo aparte, de un paisaje en el que yo quería entrar y del que no quería salir.</p>
-      <p class="o" data-tipo="resto" data-n="6">Cada respuesta a mis preguntas se transformaba en atmósferas inhabitadas, por momentos indescifrables, de lenguajes desconocidos.</p>
-      <p class="o" data-tipo="resto" data-n="7">De algún modo empezaba a conocerte a través de este universo que contabas.</p>
-      <p class="o" data-tipo="resto" data-n="8">Era apenas el principio y yo ya sentía que deambulaba en esas habitaciones imaginarias, en esas horas atascadas en un pasado tuyo y solo tuyo; en cada detalle de lo que decías yo encontraba la confirmación de un mundo que yo pensaba solo desde la literatura.</p>
-      <p class="o" data-tipo="resto" data-n="9">Allí estabas, dibujando tu mundo en cada oración.</p>
-      <p class="o" data-tipo="resto" data-n="10">Y es entonces cuando una dimensión comenzó a afirmarse a sí misma.</p>
-      <p class="o" data-tipo="resto" data-n="11">«Demasiado», sí, eres «Demasiado».</p>
-      <p class="o" data-tipo="resto" data-n="12">Lo repetimos varias veces, incluso con humor.</p>
-      <p class="o" data-tipo="resto" data-n="13">«Demasiado».</p>
-      <p class="o" data-tipo="resto" data-n="14">Y quiero más.</p>
-      <h3 class="seccion">3. La Prolongación.</h3>
-      <p class="o" data-tipo="resto" data-n="15">En curso.</p>
-      <h3 class="seccion">4. El Error.</h3>
-      <p class="o" data-tipo="resto" data-n="16">En curso.</p>
+<main id="panel" role="tabpanel">
+  <section class="escena">
+    <div class="portada">
+      <h1 id="titulo">&nbsp;</h1>
+      <p class="credito aparato" id="credito"></p>
     </div>
-  <!-- /AUN:TEXTO es -->
+    <a class="desliz aparato" href="#texto" id="leer">leer</a>
+  </section>
 
-  <!-- AUN:TEXTO en -->
-  <div data-texto lang="en" data-reglas="R1" data-fuente="carta_a_line.en.md">
-      <h3 class="seccion">1. Introduction.</h3>
-      <p class="o" data-tipo="resto" data-n="1">There we were, sitting, in the east of Paris, on a terrace neither of us knew.</p>
-      <p class="o" data-tipo="resto" data-n="2">From the moment I left the apartment a mixture of excitement and nervousness was becoming visible in my body: I did not stop sweating on the way and the temperature was not that high.</p>
-      <p class="o" data-tipo="resto" data-n="3">I fear I was sweating so much because of the excitement and the uncertainty of the encounter.</p>
-      <h3 class="seccion">2. A new notion: «Too Much».</h3>
-      <p class="o" data-tipo="resto" data-n="4">The conversation quickly turned into an exploration of your years before Paris, the intersection between the German world and the world of the former USSR your parents come from.</p>
-      <p class="o" data-tipo="resto" data-n="5">The further you went into your story, into your encounter with the Chanson Française, into your early leaning towards singing but above all towards exploring the world in an unusual way, the more you did it the intensity of your words produced a kind of separate universe, of a landscape I wanted to enter and did not want to leave.</p>
-      <p class="o" data-tipo="resto" data-n="6">Every answer to my questions turned into uninhabited atmospheres, at moments indecipherable, of unknown languages.</p>
-      <p class="o" data-tipo="resto" data-n="7">Somehow I was beginning to know you through this universe you were telling.</p>
-      <p class="o" data-tipo="resto" data-n="8">It was barely the beginning and I already felt I was wandering in those imaginary rooms, in those hours stuck in a past of yours and yours alone; in every detail of what you said I found the confirmation of a world I had only thought from literature.</p>
-      <p class="o" data-tipo="resto" data-n="9">There you were, drawing your world in every sentence.</p>
-      <p class="o" data-tipo="resto" data-n="10">And it is then that a dimension began to assert itself.</p>
-      <p class="o" data-tipo="resto" data-n="11">«Too Much», yes, you are «Too Much».</p>
-      <p class="o" data-tipo="resto" data-n="12">We repeated it several times, even with humour.</p>
-      <p class="o" data-tipo="resto" data-n="13">«Too Much».</p>
-      <p class="o" data-tipo="resto" data-n="14">And I want more.</p>
-      <h3 class="seccion">3. The Prolongation.</h3>
-      <p class="o" data-tipo="resto" data-n="15">In progress.</p>
-      <h3 class="seccion">4. The Error.</h3>
-      <p class="o" data-tipo="resto" data-n="16">In progress.</p>
-    </div>
-  <!-- /AUN:TEXTO en -->
+  <article class="lectura" id="texto">
+    <header>
+      <p class="aparato" id="cabeza-meta"></p>
+      <h2 id="cabeza-titulo"></h2>
+      <p class="aparato">Paris · 2026</p>
+    </header>
+    <div id="cuerpo"></div>
+    <p class="firma">Alonso<br>Paris</p>
+  </article>
+</main>
 
-  <p class="cierre firma">Alonso<br>París</p>
+<footer class="pie aparato">
+  <span>AÚN · Line · 2026</span>
+</footer>
 
-</article>
+<script>
+/* Cada archivo de esta carpeta es una pestaña.
+   Para añadir una: poner el .md aquí y sumar una línea a esta lista. */
+var TEXTOS = [
+  { id:'poema',  archivo:'23-11-2026-line.md',  pestana:'poema',  lang:'es', tipo:'poema', meta:'Poema · español',  leer:'leer' },
+  { id:'carta',  archivo:'carta_a_line.md',     pestana:'carta',  lang:'es', tipo:'carta', meta:'Carta · español',  leer:'leer' },
+  { id:'letter', archivo:'carta_a_line.en.md',  pestana:'letter', lang:'en', tipo:'carta', meta:'Letter · english', leer:'read' }
+];
 
-<script src="../assets/js/aun.js"></script>
+(function(){
+  var doc = document.documentElement, cache = {};
+  var $ = function(id){ return document.getElementById(id); };
+
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function enLinea(s){ return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>'); }
+
+  /* markdown minimo: ## titulo, ### apartado, parrafos; un salto simple es un verso */
+  function leer(md){
+    var titulo = '', html = [];
+    md.replace(/\r/g,'').split(/\n\s*\n/).forEach(function(b){
+      b = b.replace(/^\s+|\s+$/g,''); if(!b) return;
+      var m = b.match(/^(#{1,6})\s+(.*)$/);
+      if(m && b.indexOf('\n') < 0){
+        if(m[1].length <= 2 && !titulo){ titulo = m[2]; return; }
+        html.push('<h3 class="seccion">' + enLinea(m[2]) + '</h3>'); return;
+      }
+      html.push('<p class="o">' + b.split('\n').map(function(l){ return enLinea(l.trim()); }).join('<br>') + '</p>');
+    });
+    return { titulo: titulo, html: html.join('\n') };
+  }
+
+  function traer(t){
+    if(cache[t.id]) return Promise.resolve(cache[t.id]);
+    return fetch(t.archivo, { cache:'no-cache' })
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function(md){ return (cache[t.id] = leer(md)); });
+  }
+
+  function mostrar(t, empujar){
+    Array.prototype.forEach.call($('pestanas').children, function(b){
+      if(b.tagName === 'BUTTON') b.setAttribute('aria-selected', String(b.dataset.id === t.id));
+    });
+    traer(t).then(function(r){
+      var tit = r.titulo || t.pestana;
+      $('panel').setAttribute('lang', t.lang);
+      $('titulo').textContent = tit;
+      $('titulo').classList.toggle('largo', tit.length > 32);
+      $('credito').innerHTML = '<span>Alonso</span><span>Paris 2026</span><span>' + esc(t.meta) + '</span>';
+      $('cabeza-meta').textContent = t.meta;
+      $('cabeza-titulo').textContent = tit;
+      $('leer').textContent = t.leer;
+      $('cuerpo').className = t.tipo;
+      $('cuerpo').innerHTML = r.html;
+      document.title = tit + ' — AÚN';
+      if(empujar) window.scrollTo(0, 0);
+    }).catch(function(){
+      $('titulo').textContent = t.pestana;
+      $('cuerpo').innerHTML = '<p class="o">No se pudo cargar ' + esc(t.archivo) + '.</p>';
+    });
+    if(empujar && location.hash !== '#' + t.id) history.pushState(null, '', '#' + t.id);
+  }
+
+  function porHash(){
+    var h = location.hash.slice(1);
+    for(var i = 0; i < TEXTOS.length; i++) if(TEXTOS[i].id === h) return TEXTOS[i];
+    return TEXTOS[0];
+  }
+
+  TEXTOS.forEach(function(t, i){
+    if(i) { var s = document.createElement('span'); s.className = 'sep'; s.textContent = '/'; $('pestanas').appendChild(s); }
+    var b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role','tab'); b.dataset.id = t.id; b.textContent = t.pestana;
+    b.addEventListener('click', function(){ mostrar(t, true); });
+    $('pestanas').appendChild(b);
+  });
+
+  /* el enlace "leer" no debe cambiar el hash de la pestaña */
+  $('leer').addEventListener('click', function(e){ e.preventDefault(); $('texto').scrollIntoView(); });
+  window.addEventListener('popstate', function(){ mostrar(porHash(), false); });
+
+  function modo(m){
+    doc.setAttribute('data-modo', m);
+    document.querySelectorAll('[data-modo]').forEach(function(b){ if(b.tagName === 'BUTTON') b.setAttribute('aria-pressed', String(b.dataset.modo === m)); });
+    try{ localStorage.setItem('aun:modo', m); }catch(e){}
+  }
+  document.querySelectorAll('button[data-modo]').forEach(function(b){ b.addEventListener('click', function(){ modo(b.dataset.modo); }); });
+  modo(doc.getAttribute('data-modo') || 'noche');
+
+  mostrar(porHash(), false);
+})();
+</script>
 </body>
 </html>
